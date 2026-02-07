@@ -4,6 +4,9 @@ import com.example.Model.Pedido.Pedido;
 
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Central {
 
     private static Central Instancia;
@@ -28,14 +31,20 @@ public class Central {
 
     public ArrayList<Pedido> getPedidos(){ return Pedidos; }
 
+    private static final Logger logger = LogManager.getLogger(Central.class.getName());
+
     public void agregarPedido(Pedido pedido){
-
-        // TODO: Validar que el pedido no venga vacio
-        // TODO: Validar que la lista ya se haya instanciado
-        // TODO: Log de la accion agregar Pedido
-
+        logger.info("Petición: Agregar pedido a la central: {}", pedido);
+        if (pedido == null) {
+            logger.error("Respuesta: El pedido no puede ser nulo");
+            throw new IllegalArgumentException("El pedido no puede ser nulo");
+        }
+        if (Pedidos == null) {
+            logger.error("Respuesta: La lista de pedidos no está inicializada");
+            throw new IllegalStateException("La lista de pedidos no está inicializada");
+        }
         Pedidos.add(pedido);
-
+        logger.info("Respuesta: Pedido agregado exitosamente a la central: {}", pedido);
     }
 
 }

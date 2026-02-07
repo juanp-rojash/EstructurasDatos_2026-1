@@ -28,28 +28,23 @@ public class Cliente {
 
         try {
 
+
             if (nombre == null || nombre.isEmpty() ||
                 apellido == null || apellido.isEmpty() ||
                 email == null || email.isEmpty() ||
                 identificacion == null || identificacion.isEmpty()){
-
                 logger.error("Error en los datos para la creacion del cliente " +
-                        "\nNombre: " + (nombre == null ? "Nulo" : nombre)  );
-
-                // TODO: Completar el log
-
+                        "\nNombre: " + (nombre == null ? "Nulo" : nombre) +
+                        "\nApellido: " + (apellido == null ? "Nulo" : apellido) +
+                        "\nEmail: " + (email == null ? "Nulo" : email) +
+                        "\nIdentificacion: " + (identificacion == null ? "Nulo" : identificacion));
                 throw new IllegalArgumentException("Datos invalidos");
-
             }
-
-            logger.info("Creacion del cliente exitosa: ");
-
-            // TODO: Completar el log con todos los parametros : ToString()
-
             Nombre = nombre;
             Apellido = apellido;
             Email = email;
             Identificacion = identificacion;
+            logger.info("Creacion del cliente exitosa: " + this.toString());
 
         } catch (Exception e) {
             throw new Exception(e);
@@ -57,43 +52,30 @@ public class Cliente {
 
     }
 
-    public String getApellido() {
-        return Apellido;
-    }
+    public String getApellido() { return Apellido; }
+    public String getNombre() { return Nombre; }
+    public String getIdentificacion() { return Identificacion; }
+    public String getEmail() { return Email; }
 
-    public String getNombre() {
-        return Nombre;
-    }
-
-    public String getIdentificacion() {
-        return Identificacion;
-    }
-
-    public String getEmail() {
-        return Email;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Cliente cliente = (Cliente) obj;
+        return Objects.equals(Nombre, cliente.Nombre) &&
+                Objects.equals(Apellido, cliente.Apellido) &&
+                Objects.equals(Email, cliente.Email) &&
+                Objects.equals(Identificacion, cliente.Identificacion);
     }
 
     @Override
-    public String toString(){
-
-        String mensaje = "\nCliente: " + Nombre + "\nApellido: " + Apellido + "\nIdentificacion: " + Email;
-
-        return  mensaje;
-
-    }
-
-    @Override
-    public boolean equals(Object obj){
-
-        if(this == obj) return true;
-        if(!(obj instanceof Cliente))return false;
-
-        Cliente c = (Cliente) obj;
-
-        //TODO: Realizar la comparación de todos los atributos
-
-        return true;
-
+    public String toString() {
+        return "Cliente{" +
+                "Nombre='" + Nombre + '\'' +
+                ", Apellido='" + Apellido + '\'' +
+                ", Email='" + Email + '\'' +
+                ", Identificacion='" + Identificacion + '\'' +
+                '}';
     }
 
     @Override
