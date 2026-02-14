@@ -1,6 +1,7 @@
 package com.example;
 
 
+import com.example.Api.Servicio;
 import com.example.Model.Peleador;
 import com.example.Model.Pokemon;
 import com.example.Service.ConnectionApi;
@@ -19,27 +20,15 @@ public class Main {
 
         List<Peleador> ZFighters = apiDragonBall.obtenerData();
 
-        System.out.println(ZFighters);
+        System.out.println(" ENFRENTAMIENTOS: ");
 
-        for (Peleador p : ZFighters){
+        System.out.println(Servicio.crearTorneo(ZFighters));
 
-            System.out.println(p.name());
+        System.out.println(" RASTREADOR DE PODER (> 1.000.000) ");
 
-        }
+        System.out.println(Servicio.rastrearPoder(ZFighters));
 
-        ConnectionApi<Pokemon> apiPokemon = new ConnectionApi<>(
-                "https://pokeapi.co/api/v2/pokemon/",
-                "results",
-                Pokemon.class
-        );
 
-        List<Pokemon> equipoAsh = apiPokemon.obtenerData();
-
-        for (Pokemon p : equipoAsh){
-
-            System.out.println(p.name() + " - " + p.url());
-
-        }
 
     }
 
